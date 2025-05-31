@@ -1,6 +1,6 @@
 import sys
 
-from a_stock.config import COMMISSION_RATE, LOT_SIZE, MIN_COMMISSION, TRANSFER_FEE_RATE
+from a_stock.config import COMMISSION_RATE, LOT_SIZE, MIN_COMMISSION, TRANSFER_RATE
 
 
 def find_min_quantity(price):
@@ -10,10 +10,7 @@ def find_min_quantity(price):
         amount = price * quantity
 
         commission = amount * COMMISSION_RATE
-        transfer_fee = amount * TRANSFER_FEE_RATE
-
-        total_fees = commission + transfer_fee
-        if total_fees >= MIN_COMMISSION:
+        if commission >= MIN_COMMISSION:
             return quantity
 
         quantity += LOT_SIZE
@@ -25,6 +22,6 @@ if __name__ == "__main__":
         sys.exit(1)
 
     price = float(sys.argv[1])
-    min_quantity = find_min_quantity(price)
+    quantity = find_min_quantity(price)
 
-    print(f"股票数量: {min_quantity}")
+    print(f"股票数量: {quantity}")
